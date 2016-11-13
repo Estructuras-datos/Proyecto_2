@@ -17,22 +17,19 @@ public class Archivos {
         
     }
     
-    public void leerMatriz(String ruta){
+    public int[][] leerMatriz(String ruta){
+        int[][] matrizAdj = null; 
         try{
             File file = new File(ruta);
             FileReader reader = new FileReader(file);
             BufferedReader br = new BufferedReader(reader);
-            int[][] matrizAdj = null; 
             int size = 0;
             int row = 0;
-            int cantNodos = 0;
             String linea = "";
             linea = br.readLine();
             while(linea != null){
                 String[] vals = linea.trim().split(" ");
-                cantNodos = vals.length;
                 linea = br.readLine();
-                System.out.println(cantNodos);
                 if (matrizAdj == null) {
                     size = vals.length;
                     matrizAdj = new int[size][size];
@@ -42,19 +39,25 @@ public class Archivos {
                 }
                 row++;
             }
-            //Inprimir para probar
-            for (int i = 0; i < cantNodos; i++) {
-                System.out.print("|");
-                for (int j = 0; j < cantNodos; j++) {
-                    System.out.print(matrizAdj[i][j]);
+            br.close();
+            //<--- Inprimir para probar
+            System.out.print("\t\t");
+            for (int k = 0; k < size; k++) {
+                System.out.print(k+"\t");
+            }
+            System.out.println();
+            for (int i = 0; i < size; i++) {
+                System.out.print(i+"\t|\t");
+                for (int j = 0; j < size; j++) {
+                    System.out.print(matrizAdj[i][j] + "\t");
                 }
                 System.out.println("|");
             }
-            
+            // --->
         }catch(IOException e){
             System.out.println("ERROR: " + e.getMessage());
         }
-        
+        return matrizAdj;
     }
     
     public void cargar() {

@@ -5,10 +5,42 @@
  */
 package Model;
 
+import java.util.Iterator;
+
 /**
  *
  * @author SheshoVega
  */
 public class Grafo {
+    public int numVertices;
+    public Vertice[] tablaAdj;
     
+    public Grafo(int cantVertices){
+        this.numVertices = cantVertices;
+        this.tablaAdj = new Vertice[cantVertices];
+        for(int i=0;i<numVertices;i++){
+            Vertice ver = new Vertice(Integer.toString(i));
+            tablaAdj[i] = ver;
+        }
+    }
+
+    public Vertice[] getTablaAdj() {
+        return tablaAdj;
+    }
+
+    public int getNumVertices() {
+        return numVertices;
+    }
+    
+    public void imprimirTablaAdj(){
+        for(int i=0;i<tablaAdj.length;i++){
+            Iterator<String> ite = tablaAdj[i].listAdj.iterator();
+            System.out.print( i+":\t");
+            while(ite.hasNext()){
+                String ele = ite.next();
+                System.out.print(ele + "\t");
+            }
+            System.out.println();
+        }
+    }
 }

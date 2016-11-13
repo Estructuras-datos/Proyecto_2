@@ -5,18 +5,20 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author SheshoVega
  */
 public class Vertice {
-
     String nombre;
     int numVertice;
-
+    ArrayList<String> listAdj;
     public Vertice(String x) {
         nombre = x;
         numVertice = -1;
+        listAdj = new ArrayList<String>();
     }
 
     public String nomVertice() // devuelve identificador del vértice
@@ -39,4 +41,8 @@ public class Vertice {
         return nombre + " (" + numVertice + ")";
     }
 
+    public ArrayList<String> getListAdj() {
+        return listAdj;
+    }
+    
 }
