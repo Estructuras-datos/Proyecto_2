@@ -1,7 +1,10 @@
 package Model;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,7 +16,47 @@ public class Archivos {
     public Archivos() {
         
     }
-
+    
+    public void leerMatriz(String ruta){
+        try{
+            File file = new File(ruta);
+            FileReader reader = new FileReader(file);
+            BufferedReader br = new BufferedReader(reader);
+            int[][] matrizAdj = null; 
+            int size = 0;
+            int row = 0;
+            int cantNodos = 0;
+            String linea = "";
+            linea = br.readLine();
+            while(linea != null){
+                String[] vals = linea.trim().split(" ");
+                cantNodos = vals.length;
+                linea = br.readLine();
+                System.out.println(cantNodos);
+                if (matrizAdj == null) {
+                    size = vals.length;
+                    matrizAdj = new int[size][size];
+                }
+                for (int col = 0; col < size; col++) {
+                    matrizAdj[row][col] = Integer.parseInt(vals[col]);
+                }
+                row++;
+            }
+            //Inprimir para probar
+            for (int i = 0; i < cantNodos; i++) {
+                System.out.print("|");
+                for (int j = 0; j < cantNodos; j++) {
+                    System.out.print(matrizAdj[i][j]);
+                }
+                System.out.println("|");
+            }
+            
+        }catch(IOException e){
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        
+    }
+    
     public void cargar() {
         try {
             // Abriendo el archivo
