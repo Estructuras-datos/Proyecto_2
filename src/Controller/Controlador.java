@@ -33,14 +33,14 @@ public class Controlador {
                 }
             }
         }
-        for(int i=0;i<grafo.getNumVertices();i++){
-            System.out.print("Vertice "+i+": ");
-            System.out.println(pageRank(grafo.getTablaAdj()[i]));
-        }
+        //for(int i=0;i<grafo.getNumVertices();i++){
+        //    System.out.print("Vertice "+i+": ");
+        //    System.out.println(pageRank(grafo.getTablaAdj()[i]));
+        //}
         //<--- Inprimir para probar
         //grafo.imprimirTablaAdj();
         // --->
-
+        pageRank(grafo.getTablaAdj()[0]);
     }
 
     public double pageRank(Vertice actual) {
@@ -56,14 +56,22 @@ public class Controlador {
         }
 
         Iterator<Vertice> it = apuntando.iterator();
-        double resultado = 0.01616948;
+        double resultado = 0;
+        
 
         while (it.hasNext()) {
             Vertice aux=it.next();
-            resultado = (0.85 * (pageRank(aux) / aux.getListAdj().size())) + (1 - 0.85);
+            resultado +=( pageRank(aux) / aux.getListAdj().size() );
+            
         }
-
+        resultado=0.85*resultado;
+        resultado+=(1-0.85);
+        if(apuntando.size()==0){
+            resultado = 0.15;
+        }
         return resultado;
 
     }
+    
+    
 }
