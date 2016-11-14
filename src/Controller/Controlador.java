@@ -8,6 +8,7 @@ package Controller;
 import Model.Archivos;
 import Model.Grafo;
 import Model.Vertice;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -15,9 +16,11 @@ import java.util.Iterator;
  * @author SheshoVega
  */
 public class Controlador {
+
     Archivos arch;
     Grafo grafo;
-    public void cargarInfo(String file){
+
+    public void cargarInfo(String file) {
         arch = new Archivos();
         int[][] matrizAdj = arch.leerMatriz(file);
         int size = matrizAdj.length;
@@ -25,15 +28,42 @@ public class Controlador {
 //        System.out.println(size);
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                if(matrizAdj[row][col] == 1){
+                if (matrizAdj[row][col] == 1) {
                     grafo.tablaAdj[row].getListAdj().add(Integer.toString(col));
                 }
             }
         }
-        
+        for(int i=0;i<grafo.getNumVertices();i++){
+            System.out.print("Vertice "+i+": ");
+            System.out.println(pageRank(grafo.getTablaAdj()[i]));
+        }
         //<--- Inprimir para probar
-        grafo.imprimirTablaAdj();
+        //grafo.imprimirTablaAdj();
         // --->
-        
+
+    }
+
+    public double pageRank(Vertice actual) {
+
+        ArrayList<Vertice> apuntando = new ArrayList<Vertice>();
+
+        for (int i = 0; i < grafo.getNumVertices(); i++) {
+            for (String aux : grafo.getTablaAdj()[i].getListAdj()) {
+                if (aux.equals(actual.nomVertice())) {
+                    apuntando.add(grafo.getTablaAdj()[i]);
+                }
+            }
+        }
+
+        Iterator<Vertice> it = apuntando.iterator();
+        double resultado = 0.01616948;
+
+        while (it.hasNext()) {
+            Vertice aux=it.next();
+            resultado = (0.85 * (pageRank(aux) / aux.getListAdj().size())) + (1 - 0.85);
+        }
+
+        return resultado;
+
     }
 }
