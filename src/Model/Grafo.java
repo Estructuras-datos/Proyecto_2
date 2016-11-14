@@ -34,11 +34,11 @@ public class Grafo {
     
     public void imprimirTablaAdj(){
         for(int i=0;i<tablaAdj.length;i++){
-            Iterator<String> ite = tablaAdj[i].listAdj.iterator();
+            Iterator<Arco> ite = tablaAdj[i].listAdj.iterator();
             System.out.print( i+":\t");
             while(ite.hasNext()){
-                String ele = ite.next();
-                System.out.print(ele + "\t");
+                Arco ele = ite.next();
+                System.out.print(ele.getDestino() + "\t");
             }
             System.out.println();
         }

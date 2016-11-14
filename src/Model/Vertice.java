@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public class Vertice {
     String nombre;
     int numVertice;
-    ArrayList<String> listAdj;
+    ArrayList<Arco> listAdj;
     public Vertice(String x) {
         nombre = x;
         numVertice = -1;
-        listAdj = new ArrayList<String>();
+        listAdj = new ArrayList<Arco>();
     }
 
     public String nomVertice() // devuelve identificador del vértice
@@ -41,7 +41,7 @@ public class Vertice {
         return nombre + " (" + numVertice + ")";
     }
 
-    public ArrayList<String> getListAdj() {
+    public ArrayList<Arco> getListAdj() {
         return listAdj;
     }
     

@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Archivos;
+import Model.Arco;
 import Model.Grafo;
 import Model.Vertice;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class Controlador {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 if (matrizAdj[row][col] == 1) {
-                    grafo.tablaAdj[row].getListAdj().add(Integer.toString(col));
+                    grafo.tablaAdj[row].getListAdj().add(new Arco(col));
                 }
             }
         }
@@ -39,10 +40,10 @@ public class Controlador {
         grafo.imprimirTablaAdj();
         // --->
         System.out.println("\nResultados PageRank:\n");
-        for(int i=0;i<grafo.getNumVertices();i++){
-            System.out.print("Vertice "+i+":\t");
-            System.out.println(pageRank(grafo.getTablaAdj()[i]));
-        }
+//        for(int i=0;i<grafo.getNumVertices();i++){
+//            System.out.print("Vertice "+i+":\t");
+//            System.out.println(pageRank(grafo.getTablaAdj()[i])); arreglar xq se metieron los arcos
+//        }
         System.out.println();
 
         //for(int i=0;i<grafo.getNumVertices();i++){
@@ -52,7 +53,6 @@ public class Controlador {
         //<--- Inprimir para probar
         //grafo.imprimirTablaAdj();
         // --->
-        pageRank(grafo.getTablaAdj()[0]);
     }
 
     public double pageRank(Vertice actual) {
@@ -60,7 +60,7 @@ public class Controlador {
         ArrayList<Vertice> apuntando = new ArrayList<Vertice>();
 
         for (int i = 0; i < grafo.getNumVertices(); i++) {
-            for (String aux : grafo.getTablaAdj()[i].getListAdj()) {
+            for (Arco aux : grafo.getTablaAdj()[i].getListAdj()) {
                 if (aux.equals(actual.nomVertice())) {
                     apuntando.add(grafo.getTablaAdj()[i]);
                 }
