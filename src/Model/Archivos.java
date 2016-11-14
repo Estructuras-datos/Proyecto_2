@@ -41,6 +41,7 @@ public class Archivos {
             }
             br.close();
             //<--- Inprimir para probar
+            System.out.println("\nMatriz de adyacencia: \n");
             System.out.print("\t\t");
             for (int k = 0; k < size; k++) {
                 System.out.print(k+"\t");

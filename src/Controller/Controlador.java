@@ -33,14 +33,16 @@ public class Controlador {
                 }
             }
         }
+        //<--- Inprimir para probar
+        System.out.println("\nLista de adyacencias:\n");
+        grafo.imprimirTablaAdj();
+        // --->
+        System.out.println("\nResultados PageRank:\n");
         for(int i=0;i<grafo.getNumVertices();i++){
-            System.out.print("Vertice "+i+": ");
+            System.out.print("Vertice "+i+":\t");
             System.out.println(pageRank(grafo.getTablaAdj()[i]));
         }
-        //<--- Inprimir para probar
-        //grafo.imprimirTablaAdj();
-        // --->
-
+        System.out.println();
     }
 
     public double pageRank(Vertice actual) {
