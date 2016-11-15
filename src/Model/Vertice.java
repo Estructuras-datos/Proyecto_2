@@ -44,5 +44,11 @@ public class Vertice {
     public ArrayList<Arco> getListAdj() {
         return listAdj;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
+    
     
 }

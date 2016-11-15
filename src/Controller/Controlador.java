@@ -57,6 +57,7 @@ public class Controlador {
         
         
         System.out.println("\nResultados PageRank:\n");
+        System.out.println(pageRank(grafo.getTablaAdj()[0]));
 //        for(int i=0;i<grafo.getNumVertices();i++){
 //            System.out.print("Vertice "+i+":\t");
 //            System.out.println(pageRank(grafo.getTablaAdj()[i])); arreglar xq se metieron los arcos
@@ -78,7 +79,7 @@ public class Controlador {
 
         for (int i = 0; i < grafo.getNumVertices(); i++) {
             for (Arco aux : grafo.getTablaAdj()[i].getListAdj()) {
-                if (aux.equals(actual.nomVertice())) {
+                if (aux.getDestino()==Integer.parseInt(actual.getNombre())) {
                     apuntando.add(grafo.getTablaAdj()[i]);
                 }
             }
