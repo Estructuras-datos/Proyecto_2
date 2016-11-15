@@ -36,14 +36,14 @@ public class Controlador {
         }
 
         //<--- Inprimir para probar
-        System.out.println("\nLista de adyacencias:\n");
+        System.out.println("\nLista de adyacencias:");
         grafo.imprimirTablaAdj();
         // --->
         
         //<--- Inprimir hash entradas para probar
         Vertice[] ins = this.getEntradas(grafo);
 //        System.out.print(grafo.numVertices);
-        System.out.println("\nLista de entradas de cada vertice:\n");
+        System.out.println("\nLista de entradas de cada vertice:");
         for(int z=0;z<ins.length;z++){
             Iterator<Arco> ite = ins[z].getListAdj().iterator();
             System.out.print( z+":\t");
@@ -55,13 +55,15 @@ public class Controlador {
         }
         // --->
         
+        //Cantidad de Entradas y Salidas de cada Vertice
+        this.imprimirNumInputsOutputs(ins, grafo.getTablaAdj());
         
-        System.out.println("\nResultados PageRank:\n");
-        System.out.println(pageRank(grafo.getTablaAdj()[0]));
-//        for(int i=0;i<grafo.getNumVertices();i++){
-//            System.out.print("Vertice "+i+":\t");
-//            System.out.println(pageRank(grafo.getTablaAdj()[i])); arreglar xq se metieron los arcos
-//        }
+        System.out.println("Resultados PageRank:");
+//        System.out.println(pageRank(grafo.getTablaAdj()[0]));
+        for(int i=0;i<grafo.getNumVertices();i++){
+            System.out.print("Vertice "+i+":\t");
+            System.out.println(pageRank(grafo.getTablaAdj()[i])); //arreglar xq se metieron los arcos
+        }
         System.out.println();
 
         //for(int i=0;i<grafo.getNumVertices();i++){
@@ -122,5 +124,19 @@ public class Controlador {
             }            
         }
         return entradas;
+    }
+    
+    public void imprimirNumInputsOutputs(Vertice[] entradas, Vertice[] salidas){
+        System.out.println("\nCantidad de entradas por Vertice:");
+        for(int i=0;i<entradas.length;i++){
+            System.out.print("Vertice "+i+":\t");
+            System.out.println(entradas[i].getListAdj().size());
+        }
+        System.out.println("\nCantidad de entradas por Vertice:");
+        for(int j=0;j<salidas.length;j++){
+            System.out.print("Vertice "+j+":\t");
+            System.out.println(salidas[j].getListAdj().size());
+        }
+        System.out.println();
     }
 }
