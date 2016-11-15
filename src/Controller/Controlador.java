@@ -39,6 +39,23 @@ public class Controlador {
         System.out.println("\nLista de adyacencias:\n");
         grafo.imprimirTablaAdj();
         // --->
+        
+        //<--- Inprimir hash entradas para probar
+        Vertice[] ins = this.getEntradas(grafo);
+//        System.out.print(grafo.numVertices);
+        System.out.println("\nLista de entradas de cada vertice:\n");
+        for(int z=0;z<ins.length;z++){
+            Iterator<Arco> ite = ins[z].getListAdj().iterator();
+            System.out.print( z+":\t");
+            while(ite.hasNext()){
+                Arco ele = ite.next();
+                System.out.print(ele.getDestino() + "\t");
+            }
+            System.out.println();
+        }
+        // --->
+        
+        
         System.out.println("\nResultados PageRank:\n");
 //        for(int i=0;i<grafo.getNumVertices();i++){
 //            System.out.print("Vertice "+i+":\t");
@@ -85,5 +102,24 @@ public class Controlador {
 
     }
     
-    
+    public Vertice[] getEntradas(Grafo g){
+        int size = g.numVertices;
+        Vertice[] entradas = new Vertice[size];
+        for(int i=0;i<size;i++){ //inicializar entradas
+            Vertice ver = new Vertice(Integer.toString(i));
+            entradas[i] = ver;
+        }
+        for(int j=0;j<size;j++){
+            for(int k=0;k<g.tablaAdj.length;k++){
+                Iterator<Arco> ite = g.tablaAdj[k].getListAdj().iterator();
+                while(ite.hasNext()){
+                    Arco ele = ite.next();
+                    if(ele.getDestino() == j){
+                        entradas[j].getListAdj().add(new Arco(k));
+                    }
+                }
+            }            
+        }
+        return entradas;
+    }
 }
