@@ -26,7 +26,6 @@ public class Controlador {
         int[][] matrizAdj = arch.leerMatriz(file);
         int size = matrizAdj.length;
         grafo = new Grafo(size);
-//        System.out.println(size);
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 if (matrizAdj[row][col] == 1) {
@@ -59,20 +58,12 @@ public class Controlador {
         this.imprimirNumInputsOutputs(ins, grafo.getTablaAdj());
         
         System.out.println("Resultados PageRank:");
-//        System.out.println(pageRank(grafo.getTablaAdj()[0]));
         for(int i=0;i<grafo.getNumVertices();i++){
             System.out.print("Vertice "+i+":\t");
-            System.out.println(pageRank(grafo.getTablaAdj()[i])); //arreglar xq se metieron los arcos
+            System.out.println(pageRank(grafo.getTablaAdj()[i]));
         }
         System.out.println();
-
-        //for(int i=0;i<grafo.getNumVertices();i++){
-        //    System.out.print("Vertice "+i+": ");
-        //    System.out.println(pageRank(grafo.getTablaAdj()[i]));
-        //}
-        //<--- Inprimir para probar
-        //grafo.imprimirTablaAdj();
-        // --->
+        
     }
 
     public double pageRank(Vertice actual) {
